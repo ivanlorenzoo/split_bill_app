@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Test coverage output
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Kiro IDE (local config, not needed in repo)
+.kiro/
+
+# Logs
+npm-debug.log*
+*.log

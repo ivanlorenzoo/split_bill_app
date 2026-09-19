@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split Bill App</title>
+  <meta name="description" content="Aplikasi pembagi tagihan bersama — tambahkan peserta, catat item, dan lihat ringkasan pembayaran per orang." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <noscript>
+    <div style="padding: 1rem; background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; text-align: center;">
+      Aplikasi ini memerlukan JavaScript untuk berjalan. Mohon aktifkan JavaScript di browser Anda.
+    </div>
+  </noscript>
+
+  <header>
+    <h1>Split Bill App</h1>
+    <button
+      id="btn-reset"
+      class="btn btn-ghost btn-sm"
+      type="button"
+      aria-label="Reset semua data"
+    >
+      Reset
+    </button>
+  </header>
+
+  <main>
+    <section
+      id="participant-panel"
+      class="panel"
+      aria-label="Panel Peserta"
+      aria-describedby="participant-panel-desc"
+    >
+      <span id="participant-panel-desc" class="sr-only">Kelola daftar peserta yang akan membagi tagihan</span>
+      <!-- renderParticipantPanel akan mengisi konten ini -->
+    </section>
+
+    <section
+      id="bill-panel"
+      class="panel"
+      aria-label="Panel Tagihan"
+      aria-describedby="bill-panel-desc"
+    >
+      <span id="bill-panel-desc" class="sr-only">Tambahkan dan kelola item tagihan beserta penugasan peserta</span>
+      <!-- renderBillPanel dan renderTaxTipPanel akan mengisi konten ini -->
+    </section>
+
+    <section
+      id="summary-panel"
+      class="panel"
+      aria-label="Panel Ringkasan"
+      aria-describedby="summary-panel-desc"
+    >
+      <span id="summary-panel-desc" class="sr-only">Ringkasan total tagihan dan rincian pembayaran per peserta</span>
+      <!-- renderSummaryPanel akan mengisi konten ini -->
+    </section>
+  </main>
+
+  <footer>
+    <p>Split Bill App &mdash; Bagi tagihan bersama dengan mudah dan adil.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
