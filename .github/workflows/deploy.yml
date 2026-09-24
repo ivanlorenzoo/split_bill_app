@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
 
+# Allow GitHub Actions to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   test:
     name: Run Tests
@@ -29,28 +35,26 @@ jobs:
         working-directory: split-bill-app
 
   deploy:
-    name: Deploy to Server
+    name: Deploy to GitHub Pages
     needs: test
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-      - name: Sync files to server
-        run: |
-          rsync -avz --delete \
-            --exclude 'node_modules/' \
-            --exclude 'tests/' \
-            --exclude 'vitest.config.js' \
-            --exclude 'package.json' \
-            --exclude 'package-lock.json' \
-            split-bill-app/ \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: split-bill-app
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
